@@ -1,3 +1,3 @@
 export default {
-    base: '/benzxProj3ct/'
+    base: '/benzxProject/'
 }
