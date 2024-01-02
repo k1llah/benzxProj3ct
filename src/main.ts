@@ -1,2 +1,2 @@
-import './style.css'
-console.log('new project')
+import "./style.css";
+console.log("new project");
