@@ -32,7 +32,7 @@ let arrOfSneakers = [
   },
 ];
 let items = document.querySelector(".items") as HTMLDivElement;
-function renderCards(products:any){
+function renderCards(arg:any){
 	items.innerHTML = ''
 arrOfSneakers.forEach(el => {
   let cardWrapper = document.createElement("div") as HTMLDivElement;
@@ -79,17 +79,23 @@ arrOfSneakers.forEach(el => {
   items.appendChild(cardWrapper);
 });
 }
-renderCards(arrOfSneakers)
 let select = document.querySelector('.filter') as HTMLSelectElement
 const savedFilter = localStorage.getItem('selectedFilter');
 if (savedFilter) {
   select.value = savedFilter;
 }
-
+function sortByNameAscending(a:any, b:any) {
+  return a.name.localeCompare(b.name);
+}
+	
 	select.addEventListener('change',(el)=>{
 		let target = el.target as HTMLSelectElement
 		localStorage.setItem('selectedFilter', target.value);
-		if(target.value == 'expensive'){
+		if(select.value == 'by_name'){
+			const sortedProducts = [...arrOfSneakers].sort(sortByNameAscending);
+			renderCards(sortedProducts)
+		}
+		else if(target.value == 'expensive'){
 			const currentProducts = [...arrOfSneakers].sort((a, b) => b.coast - a.coast);
 			renderCards(currentProducts)
 		}
