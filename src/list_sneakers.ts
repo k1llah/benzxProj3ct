@@ -87,19 +87,20 @@ if (savedFilter) {
 function sortByNameAscending(a:any, b:any) {
   return a.name.localeCompare(b.name);
 }
-	if(select.value == 'by_name'){
-		const sortedProducts = [...arrOfSneakers].sort(sortByNameAscending);
-			renderCards(sortedProducts)
-			localStorage.setItem('selectedFilter', select.value);
-	}
-	else if(select.value == 'expensive'){
-		const currentProducts = [...arrOfSneakers].sort((a, b) => b.coast - a.coast);
-		localStorage.setItem('selectedFilter', select.value);
-			renderCards(currentProducts)
-	}
 	
-		
-		
+	select.addEventListener('change',(el)=>{
+		let target = el.target as HTMLSelectElement
+		localStorage.setItem('selectedFilter', target.value);
+		if(select.value == 'by_name'){
+			const sortedProducts = [...arrOfSneakers].sort(sortByNameAscending);
+			renderCards(sortedProducts)
+		}
+		else if(target.value == 'expensive'){
+			const currentProducts = [...arrOfSneakers].sort((a, b) => b.coast - a.coast);
+			renderCards(currentProducts)
+		}
+		console.log(target.value)
+	})
 	
 		console.log(select.value)
 
