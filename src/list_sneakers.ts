@@ -10,31 +10,33 @@ let arrOfSneakers = [
     img: "potat.jpeg",
     name: "vans knu school",
     coast: 15_300,
-		type: 'Кеды'
+    type: "Кеды",
   },
   {
     img: "trainer.webp",
     name: " Nike airmax",
     coast: 11_200,
-		type: 'Кроссовки'
+    type: "Кроссовки",
   },
   {
     img: "purp.jpeg",
     name: " Nike air Jordan Purple metallic",
     coast: 13_800,
-		type: 'Кроссовки'
+    type: "Кроссовки",
   },
-	{
+  {
     img: "purp.jpeg",
     name: " Nike air Jordan Purple metallic",
     coast: 13_800,
-		type: 'Кроссовки'
+    type: "Кроссовки",
   },
 ];
 let items = document.querySelector(".items") as HTMLDivElement;
-function renderCards(data:any){
-	items.innerHTML = ''
-	items.innerHTML = data.map((el:any) => `
+function renderCards(data: any) {
+  items.innerHTML = "";
+  items.innerHTML = data
+    .map(
+      (el: any) => `
   <div class="card_wrapper">
       <img src="${el.img}" class="img_card">
       <p class="name_card">${el.name}</p>
@@ -46,29 +48,35 @@ function renderCards(data:any){
         <button class="add_button">+</button>
       </div>
     </div>
-  `).join('');
+  `
+    )
+    .join("");
 }
-let select = document.querySelector('.filter') as HTMLSelectElement
-const savedFilter = localStorage.getItem('selectedFilter');
+let select = document.querySelector(".filter") as HTMLSelectElement;
+const savedFilter = localStorage.getItem("selectedFilter");
 if (savedFilter) {
   select.value = savedFilter;
 }
-const sortByNameAscending = (a:any, b:any) => a.name.localeCompare(b.name);
-
-	
-	select.addEventListener('change',(el)=>{
-		let target = el.target as HTMLSelectElement
-		localStorage.setItem('selectedFilter', target.value);
-		if(select.value == 'by_name'){
-			const sortedProducts = [...arrOfSneakers].sort(sortByNameAscending);
-			renderCards(sortedProducts)
-		}
-		else if(target.value == 'expensive'){
-			const currentProducts = [...arrOfSneakers].sort((a, b) => b.coast - a.coast);
-			renderCards(currentProducts)
-		}
-		console.log(target.value)
-	})
-	
-		console.log(select.value)
-
+const firstExpenive = [...arrOfSneakers].sort((a, b) => b.coast - a.coast);
+const sortedFirstCheap = [...arrOfSneakers].sort((a, b) => a.coast - b.coast);
+const sortedProducts = [...arrOfSneakers].sort((a: any, b: any) => a.name.localeCompare(b.name));
+select.addEventListener("change", el => {
+  let target = el.target as HTMLSelectElement;
+  localStorage.setItem("selectedFilter", target.value);
+  if (select.value == "by_name") {
+    renderCards(sortedProducts);
+  } else if (target.value == "expensive") {
+    renderCards(firstExpenive);
+  } else if (target.value == "cheap") {
+    renderCards(sortedFirstCheap);
+  }
+  console.log(target.value);
+});
+if (select.value == "by_name") {
+  renderCards(sortedProducts);
+} else if (select.value == "expensive") {
+  renderCards(firstExpenive);
+} else if (select.value == "cheap") {
+  renderCards(sortedFirstCheap);
+}
+console.log(select.value);
