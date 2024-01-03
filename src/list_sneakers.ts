@@ -80,3 +80,38 @@ if (select.value == "by_name") {
   renderCards(sortedFirstCheap);
 }
 console.log(select.value);
+
+
+//! Здесь буду делать поиск с debounce func глянем чо выйдет)))))
+let inputSearch = document.querySelector('#search_sneaker') as HTMLInputElement
+inputSearch.addEventListener('input',(event)=>{
+	let searchTerm = (event.target as HTMLInputElement).value.toLowerCase()
+	let filteredProducts = arrOfSneakers.filter((el)=>{
+		el.name.toLowerCase().includes(searchTerm)
+		renderCards(filteredProducts);
+	})
+})
+ function debounceFunc (func:any,delay:any){
+	let timeoutId:number
+	return function(){
+		const context = this;
+		const arg = arguments
+		clearTimeout(timeoutId)
+		timeoutId = setTimeout(() => {
+			func.apply(context,arg)
+		},delay)
+	}
+ }
+ let debouncedSearch = debounceFunc((searchTerm:any) => {
+  let filteredProducts = arrOfSneakers.filter(product =>
+    product.name.toLowerCase().includes(searchTerm)
+  );
+  renderCards(filteredProducts);
+}, 300); 
+inputSearch.addEventListener('input', (event)=>{
+	let searchTerm = (event.target as HTMLInputElement).value.toLowerCase()
+	//@ts-ignore
+	debouncedSearch(searchTerm)
+})
+
+ 
