@@ -32,61 +32,29 @@ let arrOfSneakers = [
   },
 ];
 let items = document.querySelector(".items") as HTMLDivElement;
-function renderCards(arg:any){
+function renderCards(data:any){
 	items.innerHTML = ''
-arrOfSneakers.forEach(el => {
-  let cardWrapper = document.createElement("div") as HTMLDivElement;
-  cardWrapper.className = "card_wrapper";
-
-  let imgCard = document.createElement("img") as HTMLImageElement;
-  imgCard.src = el.img;
-  imgCard.className = "img_card";
-
-  let pCard = document.createElement("p") as HTMLParagraphElement;
-  pCard.className = "name_card";
-  pCard.textContent = el.name;
-
-  let coastP = document.createElement("p") as HTMLDivElement;
-  coastP.className = "coast_p";
-  coastP.textContent = "Цена:";
-
-  let price = document.createElement("p") as HTMLParagraphElement;
-	price.className = 'priceP'
-  price.textContent = el.coast.toLocaleString();
-
-  let addButton = document.createElement("button") as HTMLButtonElement;
-  addButton.className = "add_button";
-  addButton.textContent = "+";
-
-  let divCoast = document.createElement("div") as HTMLDivElement;
-	divCoast.className = 'div_coast'
-  divCoast.appendChild(coastP);
-  divCoast.appendChild(price);
-  let divBottomCard = document.createElement("div") as HTMLDivElement;
-	divBottomCard.className = 'div_bottom_card'
-  divBottomCard.appendChild(divCoast);
-  divBottomCard.appendChild(addButton);
-  divCoast.appendChild(coastP);
-  divCoast.appendChild(price);
-
-  divBottomCard.appendChild(divCoast);
-  divBottomCard.appendChild(addButton);
-
-  cardWrapper.appendChild(imgCard);
-  cardWrapper.appendChild(pCard);
-  cardWrapper.appendChild(divBottomCard);
-
-  items.appendChild(cardWrapper);
-});
+	items.innerHTML = data.map((el:any) => `
+  <div class="card_wrapper">
+      <img src="${el.img}" class="img_card">
+      <p class="name_card">${el.name}</p>
+      <div class="div_bottom_card">
+        <div class="div_coast">
+          <p class="coast_p">Цена:</p>
+          <p class="priceP">${el.coast.toLocaleString()}</p>
+        </div>
+        <button class="add_button">+</button>
+      </div>
+    </div>
+  `).join('');
 }
 let select = document.querySelector('.filter') as HTMLSelectElement
 const savedFilter = localStorage.getItem('selectedFilter');
 if (savedFilter) {
   select.value = savedFilter;
 }
-function sortByNameAscending(a:any, b:any) {
-  return a.name.localeCompare(b.name);
-}
+const sortByNameAscending = (a:any, b:any) => a.name.localeCompare(b.name);
+
 	
 	select.addEventListener('change',(el)=>{
 		let target = el.target as HTMLSelectElement
