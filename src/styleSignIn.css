@@ -133,7 +133,7 @@ header {
   border: 3px white solid;
 }
 
-.form {
+.form, .form_2 {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -143,18 +143,18 @@ header {
 }
 
 /*Form text*/
-.title {
+.title, .title_2 {
   font-weight: bold;
   font-size: 1.6rem;
 }
 
-.subtitle {
+.subtitle, .subtitle_2 {
   font-size: 1rem;
   color: white;
 }
 
 /*Inputs box*/
-.form-container {
+.form-container, .form-container_2 {
   overflow: hidden;
   border-radius: 8px;
   background-color: #fff;
@@ -163,7 +163,7 @@ header {
   margin-bottom: 0px;
 }
 
-.input {
+.input, .input_2 {
   background: none;
   border: 0;
   outline: 0;
@@ -174,26 +174,8 @@ header {
   padding: 8px 15px;
 }
 
-.form-section {
-  padding: 16px;
-  font-size: .85rem;
-  background-color: #e0ecfb;
-  box-shadow: rgb(0 0 0 / 8%) 0 -1px;
-}
-
-.form-section a {
-  font-weight: bold;
-  color: #0066ff;
-  transition: color .3s ease;
-}
-
-.form-section a:hover {
-  color: #005ce6;
-  text-decoration: underline;
-}
-
 /*Button*/
-.form button {
+.form button, .sign_in_button {
   background-color: #0066ff;
   color: #fff;
   border: 0;
@@ -205,7 +187,7 @@ header {
   transition: background-color .3s ease;
 }
 
-.form button:hover {
+.form button:hover, .sign_in_button {
   background-color: #005ce6;
 }
 .active{
@@ -237,7 +219,7 @@ header {
   transition: all 1s;
   opacity: 1;
 }
-.error{
+.error, .error_2{
   font-size: 12px;
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
@@ -245,7 +227,7 @@ header {
   opacity: 0;
   transition: 0.8s linear all;
 }
-.error_show{
+.error_show,.error_show_2{
   opacity: 1;
   transition: 0.8s linear all;
 }

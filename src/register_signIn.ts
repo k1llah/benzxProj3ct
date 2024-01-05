@@ -1,11 +1,11 @@
 import "./styleSignIn.css";
+let inputMain = document.querySelector('.input_main') as HTMLDivElement
 let inputSignUp = document.querySelector(".input_sign_up") as HTMLDivElement;
 let signIn = document.querySelector(".sign_in_block") as HTMLDivElement;
 let column = document.querySelector(".column") as HTMLDivElement;
 let error = document.querySelector(".error") as HTMLParagraphElement;
-let storedData = localStorage.getItem('userDataArray');
+let storedData = localStorage.getItem("userDataArray");
 let userDataArray: Array<any> = storedData ? JSON.parse(storedData) : [];
-
 column.addEventListener("click", event => {
   let target = event.target as HTMLElement;
   if (
@@ -24,7 +24,7 @@ column.addEventListener("click", event => {
     signIn.classList.toggle("active");
   }
 });
-document.addEventListener("submit", event => {
+inputMain.addEventListener("submit", event => {
   let target = event.target as HTMLFormElement;
   if (target.classList.contains("form")) {
     event.preventDefault();
@@ -44,12 +44,15 @@ document.addEventListener("submit", event => {
     );
     if (userExists) {
       error.classList.add("error_show");
-    } else if(fullNameInput.value == '' || emailInput.value == '' || passwordInput.value == ''){
-			error.textContent = 'Заполните все поля'
-			error.classList.add('error_show')
-		}
-		 else {
-			error.classList.remove('error_show')
+    } else if (
+      fullNameInput.value == "" ||
+      emailInput.value == "" ||
+      passwordInput.value == ""
+    ) {
+      error.textContent = "Заполните все поля";
+      error.classList.add("error_show");
+    } else {
+      error.classList.remove("error_show");
       const userData = {
         fullName: fullNameInput.value,
         email: emailInput.value,
@@ -57,10 +60,49 @@ document.addEventListener("submit", event => {
       };
 
       userDataArray.push(userData);
-			localStorage.setItem('userDataArray', JSON.stringify(userDataArray));
+      localStorage.setItem("userDataArray", JSON.stringify(userDataArray));
       target.reset();
       console.log("Пользователь зарегистрирован:", userData);
       console.log("Массив пользователей:", userDataArray);
     }
   }
 });
+
+// Sign in part
+let input_2 = document.querySelector(".input_2");
+let isLogin = false;
+let btnSignIn = document.querySelector('.sign_in_button') as HTMLButtonElement
+let checkName = document.querySelector('.input_2[name="full_Name"]') as HTMLInputElement
+let checkPassword = document.querySelector('.input_2[name="Pass"]') as HTMLInputElement
+let error_2 = document.querySelector('.error_2') as HTMLParagraphElement
+console.log(userDataArray)
+
+
+
+btnSignIn.addEventListener("click", (event) => {
+	// ЧТО ТО Не получилось и у меня сгорело
+	// let userInfo = userDataArray.find((el)=>el.fullName === checkName.value && el.password === checkPassword.value
+	if(userDataArray.find((el)=>el.fullName === checkName.value && el.password === checkPassword.value)){
+		isLogin = true
+		console.log(userDataArray)
+		console.log('win')
+		if(error_2.classList.contains('error_show_2')){
+			error_2.classList.remove('error_show_2')
+		}
+		buttonNav.style.display = 'none';
+		signIn.classList.remove('active');
+		
+	}
+	else{
+		error_2.classList.add('error_show_2')
+		isLogin = false
+		console.log(false)
+	}
+});
+console.log(userDataArray)
+let buttonNav = document.querySelector('.sign_in') as HTMLButtonElement
+
+
+
+
+
