@@ -53,11 +53,17 @@ inputMain.addEventListener("submit", event => {
       error.classList.add("error_show");
     } else {
       error.classList.remove("error_show");
+      function generateUniqueId() {
+        return Math.random().toString(36).substr(2, 9);
+    }
+    let userId = generateUniqueId()
       const userData = {
         fullName: fullNameInput.value,
         email: emailInput.value,
         password: passwordInput.value,
+        profileData: {}
       };
+      localStorage.setItem(`user_${userId}`, JSON.stringify(userData))
 
       userDataArray.push(userData);
       localStorage.setItem("userDataArray", JSON.stringify(userDataArray));
@@ -90,7 +96,13 @@ btnSignIn.addEventListener("click", () => {
 		}
 		buttonNav.style.display = 'none';
 		signIn.classList.remove('active');
-
+    if(isLogin){
+      btnSignIn.style.display = 'none'
+      error_2.textContent = 'Вы успешно вошли в аккаунт'
+      error_2.classList.add('error_show_2')
+      error_2.style.color = 'green'
+      error_2.style.fontSize = '16px'
+    }
 	}
 	else{
 		error_2.classList.add('error_show_2')
