@@ -54,10 +54,11 @@
 							<span class="title">Sign up</span>
 							<span class="subtitle">Create a free account with your email.</span>
 							<div class="form-container">
-								<input type="text" class="input" placeholder="Full Name">
-								<input type="email" class="input" placeholder="Email">
-								<input type="password" class="input" placeholder="Password">
+								<input type="fullName" name="fullName" class="input" placeholder="Full Name">
+								<input type="email" name="email" class="input" placeholder="Email">
+								<input type="password" name="password" class="input" placeholder="Password" minlength="6">
 							</div>
+							<p class="error">Такой пользователь уже существует</p>
 							<button>Sign up</button>
 					</form>
 					

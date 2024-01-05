@@ -150,7 +150,7 @@ header {
 
 .subtitle {
   font-size: 1rem;
-  color: #666;
+  color: white;
 }
 
 /*Inputs box*/
@@ -160,6 +160,7 @@ header {
   background-color: #fff;
   margin: 1rem 0 .5rem;
   width: 100%;
+  margin-bottom: 0px;
 }
 
 .input {
@@ -235,4 +236,16 @@ header {
   left: 40%;
   transition: all 1s;
   opacity: 1;
+}
+.error{
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  color: red;
+  opacity: 0;
+  transition: 0.8s linear all;
+}
+.error_show{
+  opacity: 1;
+  transition: 0.8s linear all;
 }
