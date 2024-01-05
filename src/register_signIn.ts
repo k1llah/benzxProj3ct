@@ -69,7 +69,6 @@ inputMain.addEventListener("submit", event => {
 });
 
 // Sign in part
-let input_2 = document.querySelector(".input_2");
 let isLogin = false;
 let btnSignIn = document.querySelector('.sign_in_button') as HTMLButtonElement
 let checkName = document.querySelector('.input_2[name="full_Name"]') as HTMLInputElement
@@ -79,7 +78,7 @@ console.log(userDataArray)
 
 
 
-btnSignIn.addEventListener("click", (event) => {
+btnSignIn.addEventListener("click", () => {
 	// ЧТО ТО Не получилось и у меня сгорело
 	// let userInfo = userDataArray.find((el)=>el.fullName === checkName.value && el.password === checkPassword.value
 	if(userDataArray.find((el)=>el.fullName === checkName.value && el.password === checkPassword.value)){
@@ -91,7 +90,7 @@ btnSignIn.addEventListener("click", (event) => {
 		}
 		buttonNav.style.display = 'none';
 		signIn.classList.remove('active');
-		
+
 	}
 	else{
 		error_2.classList.add('error_show_2')
@@ -101,7 +100,7 @@ btnSignIn.addEventListener("click", (event) => {
 });
 console.log(userDataArray)
 let buttonNav = document.querySelector('.sign_in') as HTMLButtonElement
-
+isLogin
 
 
 
