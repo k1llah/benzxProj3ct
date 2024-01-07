@@ -36,7 +36,7 @@ function renderCards(data: any) {
   items.innerHTML = "";
   items.innerHTML = data
     .map(
-      (el: any) => `
+      (el: any, index:number) => `
   <div class="card_wrapper">
       <img src="${el.img}" class="img_card">
       <p class="name_card">${el.name}</p>
@@ -45,13 +45,21 @@ function renderCards(data: any) {
           <p class="coast_p">Цена:</p>
           <p class="priceP">${el.coast.toLocaleString()}</p>
         </div>
-        <button class="add_button">+</button>
+        <button class="add_button" onclick="addToCart(${index})">+</button>
       </div>
     </div>
   `
     )
     .join("");
 }
+function addToCart(index: number) {
+  const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+  const selectedItem = arrOfSneakers[index];
+  cartItems.push(selectedItem);
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  alert('Товар добавлен в корзину!');
+}
+
 let select = document.querySelector(".filter") as HTMLSelectElement;
 const savedFilter = localStorage.getItem("selectedFilter");
 if (savedFilter) {
@@ -94,7 +102,8 @@ inputSearch.addEventListener('input',(event)=>{
  function debounceFunc (func:any,delay:any){
 	let timeoutId:number
 	return function(){
-		const context = this;
+    //@ts-ignore
+    const context = this;
 		const arg = arguments
 		clearTimeout(timeoutId)
 		timeoutId = setTimeout(() => {
@@ -113,5 +122,6 @@ inputSearch.addEventListener('input', (event)=>{
 	//@ts-ignore
 	debouncedSearch(searchTerm)
 })
+
 
  
