@@ -97,19 +97,19 @@ label {
   border: 2px white solid;
   margin-top: 15px;
 }
-.add_button {
+.delete_button {
   width: 40px;
   height: 40px;
   color: black;
   background-color: transparent;
   border: 3px solid grey;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 15px;
   cursor: pointer;
   transition: 0.5s;
 }
-.add_button:hover {
-  transform: rotate(360deg);
+.delete_button:hover {
+  background-color: red;
   transition: 0.9s;
 }
 .card_wrapper {
@@ -127,7 +127,7 @@ label {
   width: 230px;
   margin: auto;
 }
-.items {
+.carts {
   display: flex;
   gap: 10px;
   width: 1200px;

@@ -52,20 +52,22 @@ function renderCards(data: any) {
     )
     .join("");
 }
-function addToCart(index: number) {
+(window as any).addToCart = function(index: number) {
   const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
   const selectedItem = arrOfSneakers[index];
   cartItems.push(selectedItem);
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
   alert('Товар добавлен в корзину!');
+  console.log(localStorage.getItem('cartItems'))
 }
+
 
 let select = document.querySelector(".filter") as HTMLSelectElement;
 const savedFilter = localStorage.getItem("selectedFilter");
 if (savedFilter) {
   select.value = savedFilter;
 }
-const firstExpenive = [...arrOfSneakers].sort((a, b) => b.coast - a.coast);
+const firstExpensive = [...arrOfSneakers].sort((a, b) => b.coast - a.coast);
 const sortedFirstCheap = [...arrOfSneakers].sort((a, b) => a.coast - b.coast);
 const sortedProducts = [...arrOfSneakers].sort((a: any, b: any) => a.name.localeCompare(b.name));
 select.addEventListener("change", el => {
@@ -74,7 +76,7 @@ select.addEventListener("change", el => {
   if (select.value == "by_name") {
     renderCards(sortedProducts);
   } else if (target.value == "expensive") {
-    renderCards(firstExpenive);
+    renderCards(firstExpensive);
   } else if (target.value == "cheap") {
     renderCards(sortedFirstCheap);
   }
@@ -83,7 +85,7 @@ select.addEventListener("change", el => {
 if (select.value == "by_name") {
   renderCards(sortedProducts);
 } else if (select.value == "expensive") {
-  renderCards(firstExpenive);
+  renderCards(firstExpensive);
 } else if (select.value == "cheap") {
   renderCards(sortedFirstCheap);
 }
